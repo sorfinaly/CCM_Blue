@@ -1,20 +1,24 @@
-based on my login.html page, how can i redirect my page to homepage after click login?
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <?php include 'header.php'; ?>
     <div class="center">
-        <h1>Welcome</h1>
-        <form method="post" post="login.php">
+        <h1>Register</h1>
+        <form method="post">
+            <div class="txt_field">
+                <label>Username</label>
+                <input type="text" name="username" pattern="[a-zA-Z0-9_]{3,16}" required>
+                <span> </span>
+            </div>
             <div class="txt_field">
                 <label>Email Address</label>
-                <input type="email" name="email" pattern="[a-z0-9._%+-]+@gmail+\.[a-z]{2,}$" required>
+                <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z]+\.[a-z]{2,}$" required>
                 <span> </span>
             </div>
             <div class="txt_field">
@@ -25,13 +29,14 @@ based on my login.html page, how can i redirect my page to homepage after click 
                        one lowercase letter, one number, and one special character." required>
                 <span> </span>
             </div>
-            <div class="forgot"> <a href='#'>Forgot Password</a></div>
-            <input type="submit" value="Login"><a href="Homepage.html"></a>
-            <div class="users_signup">
-                Don't have an account? <a href="register.html">Register</a>
+            <div class="txt_field">
+                <label>Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <span> </span>
             </div>
+            <div class="forgot">Already have an account? <a href="login.html">Login</a></div>
+            <input type="submit" value="Register">
         </form>
-        
     </div>
 
     <script src="form.js"></script>
