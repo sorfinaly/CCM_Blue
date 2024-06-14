@@ -1,50 +1,33 @@
-how to create table in phpmyadmin based on this to connect it with my 'db.php' file?
-
 <?php
 session_start();
-include 'db.php'; 
-//include 'csp.php';
+include 'db.php';
 
-// Check if email and password are set in $_POST
-if (isset($_POST['email'], $_POST['password'])) {
-    // Get user input
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+// Handle login form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-    // Retrieve user from database
-    $stmt = $mysqli->prepare("SELECT id, email, password FROM login WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Query to retrieve user data
+    $query = "SELECT * FROM users WHERE email = '$email'";
+    $result = $conn->query($query);
 
-    // Check if a row was returned
-    if ($result->num_rows == 1) {
-        // Fetch the user's data
-        $user = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $user_data = $result->fetch_assoc();
+        $hashed_password = $user_data["password"];
 
         // Verify password
-        if (password_verify($password, $user['password'])) {
-            // Authentication successful
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_password'] = $user['password'];
-
-            header("Location: Homepage.html");
-            exit();
+        if (password_verify($password, $hashed_password)) {
+            // Login successful, start session and redirect to dashboard
+            session_start();
+            $_SESSION["email"] = $email;
+            $_SESSION["username"] = $user_data["username"];
+            header("Location: ../1. Homepage/Homepage.html");
+            exit;
         } else {
-            // Invalid password
-            $errorMessage = "Invalid email or password.";
+            $error = "Invalid password";
         }
     } else {
-        // No user found with the given email
-        $errorMessage = "Invalid email or password.";
+        $error = "Email not found";
     }
-} else {
-    // Email or password not provided
-    $errorMessage = "No email and password provided.";
 }
-
-// If authentication fails or no credentials provided, redirect back to login page with error message
-echo "<script>alert('$errorMessage'); window.history.back();</script>";
-exit();
 ?>

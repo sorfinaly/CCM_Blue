@@ -1,5 +1,3 @@
-based on my login.html page, how can i redirect my page to homepage after click login?
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -7,11 +5,10 @@ based on my login.html page, how can i redirect my page to homepage after click 
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <div class="center">
         <h1>Welcome</h1>
-        <form method="post" post="login.php">
+        <form method="post" action="login.php">
             <div class="txt_field">
                 <label>Email Address</label>
                 <input type="email" name="email" pattern="[a-z0-9._%+-]+@gmail+\.[a-z]{2,}$" required>
@@ -19,14 +16,11 @@ based on my login.html page, how can i redirect my page to homepage after click 
             </div>
             <div class="txt_field">
                 <label>Password</label>
-                <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
-                       title="Password must be at least 8 characters long,
-                       contain at least one uppercase letter,
-                       one lowercase letter, one number, and one special character." required>
+                <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" required>
                 <span> </span>
             </div>
             <div class="forgot"> <a href='#'>Forgot Password</a></div>
-            <input type="submit" value="Login"><a href="Homepage.html"></a>
+            <input type="submit" value="Login">
             <div class="users_signup">
                 Don't have an account? <a href="register.html">Register</a>
             </div>
