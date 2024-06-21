@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION["email"] = $email;
             $_SESSION["username"] = $user_data["username"];
-            header("Location: ../1. Homepage/Homepage.html");
+            header("Location: homepage.html");
             exit;
         } else {
             $error = "Invalid password";

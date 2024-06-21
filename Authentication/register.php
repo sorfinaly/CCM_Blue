@@ -5,26 +5,45 @@ require_once 'db.php';
 $username = $_POST['username'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$password = $_POST['password'];
+$confirm_password = $_POST['confirmPassword']; // Correct the name to match HTML form
 
-// Insert the user into the `Users` table
-$stmt = $conn->prepare("INSERT INTO bookingsystem.users (username, email, phone, password) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $username, $email, $phone, $password);
-$stmt->execute();
-
-// Check for errors
-if ($stmt->execute()) {
-    // Registration successful
-    header('Location: login.html');
+// Check if the passwords are not empty
+if (empty($password) || empty($confirm_password)) {
+    header("Location: register.html?error=empty_passwords");
     exit();
-} else {
-    // Log the error (in a real application, consider logging this to a file)
-    error_log("Execute failed: " . $stmt->error);
-    echo "Registration failed. Please try again.";
 }
+
+// Check if the passwords match
+if ($password != $confirm_password) {
+    header("Location: register.html?error=passwords_do_not_match");
+    exit();
+}
+
+// Hash the password
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+// Prepare the statement
+$stmt = $conn->prepare("INSERT INTO bookingsystem.users (username, email, phone, password) VALUES (?, ?, ?, ?)");
+if (!$stmt) {
+    error_log("Prepare failed: ". $conn->error);
+    header("Location: register.html?error=prepare_failed");
+    exit();
+}
+
+// Bind parameters and execute the statement
+$stmt->bind_param("ssss", $username, $email, $phone, $hashed_password);
+if (!$stmt->execute()) {
+    error_log("Execute failed: ". $stmt->error);
+    header("Location: register.html?error=execute_failed");
+    exit();
+}
+
+// Registration successful
+header('Location: login.html');
+exit();
 
 // Close the statement and the connection
 $stmt->close();
 $conn->close();
 ?>
-
