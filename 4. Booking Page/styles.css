@@ -82,7 +82,7 @@ h1 {
 }
 
 .wrapper{
-	width: 50%;
+	width: 30%;
 	max-width: 100%;
 	background: var(--white);
 	margin: 40px auto 0;
@@ -163,19 +163,17 @@ h1 {
 }
 
 
-
 .wrapper .form_wrap .input_wrap{
 	width: 100%;
 	max-width: 100%;
-    padding: 40px 12px 12px 0;
-}
+    padding: 40px 12px 12px 0; }
 
 .wrapper .form_wrap .input_wrap label{
 	display: inline-block;
 	margin-bottom: 5px;
 }
 
-input[type=text] {
+input[type=text], input[type=date], input[type=number],	input[type=email], select {
 	border: 1px solid var(--white);
 	border-radius: 3px;
 	padding: 12px;
@@ -187,9 +185,10 @@ input[type=text] {
     background-color : var(--inputCol);
 }
 
-input[type=text]:focus{
+input[type=text]:focus, input[type=date]:focus, input[type=number]:focus, input[type=email]:focus, select {
 	border-color: var(--primary);
 }
+
 
 .wrapper .btns_wrap{
 	width: 750px;
@@ -201,13 +200,12 @@ input[type=text]:focus{
 	justify-content: space-between;
 }
 
-.wrapper .btns_wrap .common_btns.form_1_btns{
-	justify-content: flex-end;
-}
+
 
 .wrapper .btns_wrap .common_btns button{
 	border: 0;
     padding: 12px 20px;
+	margin-top: 20px;
 	background: var(--primary);
 	color: var(--white);
 	width: 135px;
@@ -223,7 +221,7 @@ input[type=text]:focus{
 }
 
 .wrapper .btns_wrap .common_btns button.btn_next:hover,
-.wrapper .btns_wrap .common_btns button.btn_submit:hover{
+.wrapper .btns_wrap .common_btns 	.btn_submit:hover{
 	background: var(--next-btn-hover);
 }
 
@@ -233,6 +231,7 @@ input[type=text]:focus{
 
 .form-row {
     display: flex; 
+	
 }
   
 .form-group {
@@ -240,20 +239,65 @@ input[type=text]:focus{
 }
   
 .form-group input {
-    width: 50%;
+    width: 80%;
 }
 
-.caption {
-    padding: 4px 1px;
-    font-style: italic;
-    color : #808080;
-}
+
 
 .container3 {
     padding: 0px 10px;
 }
 
-/* for Responsive layout */
+/* Styling for form_3 section */
+.form_3 {
+    margin-top: 20px;
+    /* background-color: #f9f9f9; */
+    padding: 20px;
+    /* border: 1px solid #ddd; */
+    border-radius: 5px;
+}
+
+.form_3 .form_container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form_3 .input_wrap {
+    margin-bottom: 15px;
+}
+
+.form_3 label {
+    font-weight: bold;
+}
+
+.form_3 input[type="radio"],
+.form_3 input[type="file"] {
+    margin-top: 5px;
+}
+
+.form_3 .caption {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Styling for the totalAmount span */
+#totalAmount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Optional: Style file input */
+.input[type="file"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 @media screen and (max-width: 600px) {
     .col-25, .col-75, input[type=submit] {
       width: 100%;
@@ -261,26 +305,27 @@ input[type=text]:focus{
     }
   }
 
-  .footer1{
-	background:#61A4BC;
-	padding:7em 0;
-	color:rgba(255,255,255,.7);
-	margin-top: 80px;
+.footer1{
+background:#61A4BC;
+padding:7em 0;
+color:rgba(255,255,255,.7);
+margin-top: 80px;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 300px;
+
+}
+
+#footer{
+	font-size:18px;
+	letter-spacing:.2em;
+	line-height: 1.6;
+	text-transform:uppercase;
 	display: flex;
 	justify-content: center;
-  	align-items: center;
-	height: 300px;
-	
-	}
+	align-items: center;
+	font-family:"Open Sans",Arial,sans-serif;
 
-	#footer{
-	  font-size:18px;
-	  letter-spacing:.2em;
-	  line-height: 1.6;
-	  text-transform:uppercase;
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  font-family:"Open Sans",Arial,sans-serif;
+}
 
-	}
